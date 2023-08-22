@@ -1,31 +1,56 @@
 // Separate named imports, this makes the code more readable
-import { useEffect } from "react";
+import { useEffect, lazy } from "react";
 import { useDispatch } from "react-redux";
-import { fetchContacts } from "redux/operations";
-import { Container, Phonebook, Contacts } from "components/App/App.styled";
-import ContactForm from "components/ContactForm";
-import ContactList from "components/ContactList";
-import Filter from "components/Filter";
+
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "../Layout";
+import { PrivateRoute } from "../PrivateRoute";
+import { RestrictedRoute } from "../RestrictedRoute";
+import { refreshUser } from "redux/auth/operations";
+import { useAuth } from "hooks";
+
+const HomePage = lazy(() => import("../../pages/Home"));
+const RegisterPage = lazy(() => import("../../pages/Register"));
+const LoginPage = lazy(() => import("../../pages/Login"));
+const MainPage = lazy(() => import("../../pages/Main"));
 
 const App = () => {
   const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
-  return (
-    <Container>
-      <Phonebook>
-        <h1>Phonebook</h1>
-        <ContactForm />
-      </Phonebook>
-      <Contacts>
-        <h1>Contacts</h1>
 
-        <Filter />
-        <ContactList />
-      </Contacts>
-    </Container>
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegisterPage />}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/tasks" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<MainPage />} />
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
 

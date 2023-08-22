@@ -1,11 +1,11 @@
-import { getContacts } from "redux/selectors";
+import { getContacts } from "redux/phonebook/selectors";
 import ContactListItem from "components/ContactListItem";
 import { List, Text, Span } from "./ContactList.styled";
 import { FcContacts } from "react-icons/fc";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "redux/operations";
+import { deleteContact } from "redux/phonebook/operations";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { getFilter } from "redux/selectors";
+import { getFilter } from "redux/phonebook/selectors";
 
 const ContactList = () => {
   const dispatch = useDispatch();
