@@ -10,7 +10,7 @@ const ContactForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const { name, phone } = e.target.elements;
+    const { name, number } = e.target.elements;
     const isPresentOnList = items.find(
       (contact) => contact.name.toLowerCase() === name.value.toLowerCase()
     );
@@ -18,7 +18,7 @@ const ContactForm = () => {
       Notiflix.Notify.failure(`${name.value} is already in your contacts.`);
     } else {
       Notiflix.Notify.success(`${name.value} ADDED to your contact list.`);
-      dispatch(addContact({ name: name.value, phone: phone.value }));
+      dispatch(addContact({ name: name.value, number: number.value }));
     }
 
     e.target.reset();
@@ -41,7 +41,7 @@ const ContactForm = () => {
           Number
           <Input
             type="tel"
-            name="phone"
+            name="number"
             pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
