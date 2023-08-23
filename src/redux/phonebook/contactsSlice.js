@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logOut } from "redux/auth/operations";
+
 import { fetchContacts, deleteContact, addContact } from "./operations";
 import Notiflix from "notiflix";
 
@@ -36,6 +38,11 @@ const contactsSlice = createSlice({
       state.error = null;
       state.items = state.items.filter((item) => item.id !== action.payload.id);
       Notiflix.Notify.success(`Contact was successfully DELETED.`);
+    },
+    [logOut.fulfilled](state) {
+      state.items = [];
+      state.error = null;
+      state.isLoading = false;
     },
   },
 });
