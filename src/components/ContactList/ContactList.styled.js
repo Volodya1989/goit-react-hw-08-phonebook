@@ -45,6 +45,7 @@ export const WelcomeText = styled.p`
   padding-right: 40px;
   padding-bottom: 20px;
   padding-top: 20px;
+  margin-top: 20%;
 `;
 export const WelcomeSpan = styled.span`
   display: flex;

@@ -14,14 +14,14 @@ import { fetchContacts } from "redux/phonebook/operations";
 import { Contacts, Container } from "components/App/App.styled";
 import Filter from "components/Filter";
 
-const styles = {
-  container: {
-    minHeight: "calc(100vh - 50px)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-};
+// const styles = {
+//   container: {
+//     minHeight: "calc(100vh - 50px)",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// };
 
 export default function Home() {
   const { isLoggedIn } = useAuth();
@@ -37,13 +37,12 @@ export default function Home() {
     <Container>
       <Contacts>
         <h1>Contacts</h1>
-
         <Filter />
         <ContactList />
       </Contacts>
     </Container>
   ) : (
-    <WelcomeContainer style={styles.container}>
+    <WelcomeContainer>
       <WelcomeText>
         <WelcomeSpan>
           <IconContext.Provider value={{ color: "blue", size: "100px" }}>
