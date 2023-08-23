@@ -22,12 +22,12 @@ const ContactList = () => {
       {isLoading && <b>Loading tasks...</b>}
       {error && <b>{error}</b>}
       {filteredContacts.length > 0 ? (
-        filteredContacts.map(({ name, phone, id }) => {
+        filteredContacts.map(({ name, number, id }) => {
           return (
             <ContactListItem
               key={id}
               name={name}
-              number={phone}
+              number={number}
               onDelete={() => dispatch(deleteContact(id))}
             />
           );
