@@ -17,7 +17,6 @@ const MainPage = lazy(() => import("../../pages/Main"));
 const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
-console.log("app isRefreshing", isRefreshing);
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);

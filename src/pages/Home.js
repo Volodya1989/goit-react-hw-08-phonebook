@@ -1,3 +1,19 @@
+import {
+  WelcomeText,
+  WelcomeSpan,
+  WelcomeContainer,
+  WelcomeTitle,
+} from "../components/ContactList/ContactList.styled";
+import { FcContacts } from "react-icons/fc";
+import { IconContext } from "react-icons";
+import { useAuth } from "../hooks";
+import ContactList from "components/ContactList";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchContacts } from "redux/phonebook/operations";
+import { Contacts, Container } from "components/App/App.styled";
+import Filter from "components/Filter";
+
 const styles = {
   container: {
     minHeight: "calc(100vh - 50px)",
@@ -5,21 +21,37 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: "center",
-  },
 };
 
 export default function Home() {
-  return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>
-        Contacts Organizer  manager welcome page
-        <span role="img" aria-label="Greeting icon">
-        </span>
-      </h1>
-    </div>
+  const { isLoggedIn } = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, isLoggedIn]);
+
+  return isLoggedIn ? (
+    <Container>
+      <Contacts>
+        <h1>Contacts</h1>
+
+        <Filter />
+        <ContactList />
+      </Contacts>
+    </Container>
+  ) : (
+    <WelcomeContainer style={styles.container}>
+      <WelcomeText>
+        <WelcomeSpan>
+          <IconContext.Provider value={{ color: "blue", size: "100px" }}>
+            <FcContacts />
+          </IconContext.Provider>
+        </WelcomeSpan>
+        <WelcomeTitle>Phonebook App Welcome Page </WelcomeTitle>
+      </WelcomeText>
+    </WelcomeContainer>
   );
 }
