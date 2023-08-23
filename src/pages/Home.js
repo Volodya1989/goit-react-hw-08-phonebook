@@ -4,6 +4,8 @@ import {
   WelcomeContainer,
   WelcomeTitle,
 } from "../components/ContactList/ContactList.styled";
+import { Helmet } from "react-helmet";
+
 import { FcContacts } from "react-icons/fc";
 import { IconContext } from "react-icons";
 import { useAuth } from "../hooks";
@@ -35,6 +37,9 @@ export default function Home() {
 
   return isLoggedIn ? (
     <Container>
+      <Helmet>
+        <title>Phonebook</title>
+      </Helmet>
       <Contacts>
         <h1>Contacts</h1>
         <Filter />
@@ -43,6 +48,9 @@ export default function Home() {
     </Container>
   ) : (
     <WelcomeContainer>
+      <Helmet>
+        <title>Phonebook</title>
+      </Helmet>
       <WelcomeText>
         <WelcomeSpan>
           <IconContext.Provider value={{ color: "blue", size: "100px" }}>

@@ -1,6 +1,8 @@
 // Separate named imports, this makes the code more readable
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet";
+
 import { fetchContacts } from "redux/phonebook/operations";
 import { Container, Phonebook, Contacts } from "components/App/App.styled";
 import ContactForm from "components/ContactForm";
@@ -15,6 +17,9 @@ const Main = () => {
   }, [dispatch]);
   return (
     <Container>
+      <Helmet>
+        <title>Phonebook</title>
+      </Helmet>
       <Phonebook>
         <h1>Phonebook</h1>
         <ContactForm />

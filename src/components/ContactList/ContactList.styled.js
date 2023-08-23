@@ -26,7 +26,7 @@ export const Text = styled.p`
   padding-top: 5px;
 `;
 
-export const WelcomeText = styled.p`
+export const WelcomeText = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
