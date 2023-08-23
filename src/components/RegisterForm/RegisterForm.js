@@ -20,6 +20,7 @@ const RegisterForm = () => {
 
   return (
     <div>
+      <h1>Registration</h1>
       <form onSubmit={handleSubmit} autoComplete="off">
         <Label>
           Username
