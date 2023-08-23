@@ -19,7 +19,7 @@ const ContactList = () => {
 
   return (
     <List>
-      {isLoading && <b>Loading tasks...</b>}
+      {isLoading && <b>Loading contacts...</b>}
       {error && <b>{error}</b>}
       {filteredContacts.length > 0 ? (
         filteredContacts.map(({ name, number, id }) => {
